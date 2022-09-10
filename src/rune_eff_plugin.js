@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const pluginName = 'RuneDropEfficiency2';
 const gMapping = require('./mapping.js');
 

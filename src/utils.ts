@@ -1,6 +1,5 @@
 import { Rune, Json, Stats } from './types'
 import { GRIND_VALUES } from './constants'
-const mapping = require('./mapping.js');
 const eff = require('./rune_eff_plugin.js')
 
 function processRune(rune: Rune) {
