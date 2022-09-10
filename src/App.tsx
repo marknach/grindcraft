@@ -12,6 +12,7 @@ function App() {
   const [set, setSet] = useState(0)
   const [slot, setSlot] = useState(0)
   const [stat, setStat] = useState<Stats | null>(null)
+  const [showEquipped, setShowEquipped] = useState(false)
   const [json, setJson] = useState(initJson)
   const [runes, setRunes] = useState(getRunes(json))
   const limit = 250
@@ -19,19 +20,24 @@ function App() {
   const handleSelect = (event: any) => {
     const newSet = parseInt(event.target.value, 10)
     setSet(newSet)
-    setRunes(getRunes(json, { set_id: newSet, slot_id: slot, stat, limit }))
+    setRunes(getRunes(json, { set_id: newSet, slot_id: slot, stat, showEquipped, limit }))
   }
 
   const handleSelectSlot = (event: any) => {
     const newSlot = parseInt(event.target.value, 10)
     setSlot(newSlot)
-    setRunes(getRunes(json, { set_id: set, slot_id: newSlot, stat, limit }))
+    setRunes(getRunes(json, { set_id: set, slot_id: newSlot, stat, showEquipped, limit }))
   }
 
   const handleSelectStat = (event: any) => {
     const newStat = parseInt(event.target.value, 10) as Stats
     setStat(newStat)
-    setRunes(getRunes(json, { set_id: set, slot_id: slot, stat: newStat, limit }))
+    setRunes(getRunes(json, { set_id: set, slot_id: slot, stat: newStat, showEquipped, limit }))
+  }
+
+  const handleSetShowEquipped = (event: any, checked: boolean) => {
+    setShowEquipped(checked)
+    setRunes(getRunes(json, { set_id: set, slot_id: slot, stat: stat, showEquipped: checked, limit }))
   }
 
   const handleUpload = (event: any) => {
@@ -64,6 +70,8 @@ function App() {
             handleUploadJson={handleUpload}
             stat={stat}
             setStat={handleSelectStat}
+            showEquippedOnly={showEquipped}
+            setShowEquipped={handleSetShowEquipped}
           />
           <p>Average Eff of selection: {stats.avg}</p>
 

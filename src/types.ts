@@ -5,9 +5,15 @@ export type Rune = {
     pri_eff: Array<Number>
     sec_eff: Array<Array<any>>
     prefix_eff: Array<any>
+    occupied_type?: number
+}
+
+export type Unit = {
+    runes: Rune[]
 }
 
 export type Json = {
+    unit_list: Unit[]
     runes: Rune[]
 }
 

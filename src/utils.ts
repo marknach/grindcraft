@@ -13,9 +13,18 @@ function processRune(rune: Rune) {
     }
 }
 
+function getRunesFromJson(json: Json) : Rune[] {
+    const runes = [...json.runes]
+    json.unit_list.forEach(unit => {
+        runes.push(...unit.runes)
+    })
+    return runes
+}
+
 type OptionsType = {
     set_id: number,
     slot_id: number,
+    showEquipped: boolean,
     stat: Stats | null,
     limit: number
 }
@@ -26,10 +35,11 @@ export function getRunes(
         set_id: 0,
         slot_id: 0,
         stat: null,
+        showEquipped: false,
         limit: 250
     }
 ) {
-    let runes = json.runes
+    let runes = getRunesFromJson(json)
         .map(runeJson => ({ rune: runeJson, upgradeInfo: processRune(runeJson) }))
         // .filter(rune => rune.upgradeInfo.maxHeroGrinded >  100 && (rune.upgradeInfo.maxHeroGrinded - rune.upgradeInfo.current) > 3) // top 100 is 111
 
@@ -45,6 +55,9 @@ export function getRunes(
         runes = runes.filter(rune => doesRuneHaveSubstat(rune.rune, options.stat as Stats) && couldUseGrind(rune.rune, options.stat as Stats))
     }
 
+    if (options.showEquipped) {
+        runes = runes.filter(rune => rune.rune.occupied_type === 1)
+    }
     runes.sort((a, b) => b.upgradeInfo.maxHeroGrinded - a.upgradeInfo.maxHeroGrinded)
         .slice(0, options.limit)
 

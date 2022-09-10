@@ -8,7 +8,9 @@ import Box from '@mui/material/Box'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
-import Select, { SelectChangeEvent } from '@mui/material/Select'
+import Select from '@mui/material/Select'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
 
 type ToolbarProps = {
     set: number,
@@ -18,7 +20,9 @@ type ToolbarProps = {
     json: object,
     handleUploadJson: (event: any) => void,
     stat: Stats | null,
-    setStat: (event: any) => void
+    setStat: (event: any) => void,
+    showEquippedOnly: boolean,
+    setShowEquipped: (event: any, checked: boolean) => void
 }
 
 const Wrapper = styled.div`
@@ -56,6 +60,8 @@ function Toolbar({
     handleUploadJson,
     stat,
     setStat,
+    showEquippedOnly,
+    setShowEquipped,
 }: ToolbarProps) {
   return (
     <Wrapper>
@@ -107,7 +113,10 @@ function Toolbar({
           </Select>
         </FormControl>
       </Box>
-      <input type="file" accept=".json" onChange={handleUploadJson}/>
+      <FormControlLabel control={<Checkbox checked={showEquippedOnly} onChange={setShowEquipped} />} label="Equipped Runes Only?" />
+      <Box sx={{ minWidth: 150 }}>
+        <input type="file" accept=".json" onChange={handleUploadJson}/>
+      </Box>
     </Wrapper>
   );
 }
