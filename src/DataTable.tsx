@@ -22,7 +22,7 @@ const columns: GridColDef[] = [
 export default function DataTable({ runes }: { runes: any }) {
     const tableData = createTableData(runes)
   return (
-    <Box sx={{ height: '100vh' }}>
+    <Box sx={{ height: '100%' }}>
       <DataGrid
         rows={tableData}
         columns={columns}
