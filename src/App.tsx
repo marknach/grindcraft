@@ -1,26 +1,12 @@
 import React, { useState } from 'react';
 import DataTable from './DataTable'
 import { getRunes, getAnalyticsForRunes } from './utils'
-import styled from 'styled-components'
 import initJson from './furyn.json'
 import Toolbar from './Toolbar'
 import { Stats } from './types'
 import CssBaseline from '@mui/material/CssBaseline'
 import Container from '@mui/material/Container'
 import Box from '@mui/material/Box';
-
-const Wrapper = styled.div`
-  padding: 48px;
-`
-
-const Flex = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  & > div {
-        margin-right: 15px;
-        margin-bottom: 15px;
-    }
-`
 
 function App() {
   const [set, setSet] = useState(0)
