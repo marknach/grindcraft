@@ -13,6 +13,11 @@ function processRune(rune: Rune) {
     }
 }
 
+function isAncient(rune: Rune): boolean {
+    return rune.class > 10
+}
+
+
 function getRunesFromJson(json: Json) : Rune[] {
     const runes = [...json.runes]
     json.unit_list.forEach(unit => {
@@ -41,6 +46,7 @@ export function getRunes(
 ) {
     let runes = getRunesFromJson(json)
         .map(runeJson => ({ rune: runeJson, upgradeInfo: processRune(runeJson) }))
+        .filter(rune => !isAncient(rune.rune))
         // .filter(rune => rune.upgradeInfo.maxHeroGrinded >  100 && (rune.upgradeInfo.maxHeroGrinded - rune.upgradeInfo.current) > 3) // top 100 is 111
 
     if (options.set_id) {

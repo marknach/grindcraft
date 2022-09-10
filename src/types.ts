@@ -6,6 +6,7 @@ export type Rune = {
     sec_eff: Array<Array<any>>
     prefix_eff: Array<any>
     occupied_type?: number
+    class: number
 }
 
 export type Unit = {

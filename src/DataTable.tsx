@@ -5,11 +5,11 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { createTableData } from './utils'
 
 const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 125 },
+//   { field: 'id', headerName: 'ID', width: 125 },
   { field: 'set', headerName: 'Set', width: 125 },
-  { field: 'main', headerName: 'Main Stat', width: 125 },
-  { field: 'slot', headerName: 'Slot', width: 80 },
-  { field: 'innate', headerName: 'Innate', width: 125 },
+  { field: 'main', headerName: 'Main Stat', width: 85 },
+  { field: 'slot', headerName: 'Slot', width: 50 },
+  { field: 'innate', headerName: 'Innate', width: 100 },
   { field: 'sub1', headerName: 'Sub 1', width: 125 },
   { field: 'sub2', headerName: 'Sub 2', width: 125 },
   { field: 'sub3', headerName: 'Sub 3', width: 125 },
