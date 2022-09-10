@@ -27,7 +27,7 @@ type ToolbarProps = {
 
 const Wrapper = styled.div`
     display: flex;
-    * {
+    > * {
         margin-right: 15px;
     }
 `
