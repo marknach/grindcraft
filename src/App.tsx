@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Rune from './Rune'
+import DataTable from './DataTable'
 import { getRunes, getAnalyticsForRunes } from './utils'
 import styled from 'styled-components'
 import initJson from './furyn.json'
@@ -75,11 +75,9 @@ function App() {
       />
       <p>Average Eff of selection: {stats.avg}</p>
 
-      <Flex>
-        {runes.map((rune: any) => <Rune rune={rune}/>)}
-      </Flex>
+      <DataTable runes={runes} />
     </Wrapper>
-  );
+  )
 }
 
 export default App;

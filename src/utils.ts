@@ -1,6 +1,7 @@
 import { Rune, Json, Stats } from './types'
-import { GRIND_VALUES } from './constants'
+import { GRIND_VALUES, sets } from './constants'
 const eff = require('./rune_eff_plugin.js')
+
 
 function processRune(rune: Rune) {
     const calculatedEff = eff.getRuneEfficiency(rune, { flatStatsHalf: true })
@@ -92,4 +93,34 @@ export function getGrindValueForSub(rune: Rune, property: Stats) {
 
 export function doesRuneHaveSubstat(rune: Rune, stat: Stats) {
     return rune.sec_eff.some(sub => sub[0] === stat)
+}
+
+type RuneRowData = {
+    id: number,
+    set: string,
+    slot: number,
+    innate: String,
+    sub1: String,
+    sub2: String,
+    sub3: String,
+    sub4: String,
+    currentEff: String,
+    maxEff: String,
+    // effWithGrind: String,
+}
+
+
+export function createTableData(runes: any[]): RuneRowData[] {
+    return runes.map(({ rune, upgradeInfo }) => ({
+        id: rune.rune_id,
+        set: sets[rune.set_id],
+        slot: rune.slot_no,
+        innate: rune.prefix_eff[1] ? `${rune.prefix_eff[1]} ${Stats[rune.prefix_eff[0]]}` : '',
+        sub1: rune.sec_eff.length > 0 ? `${rune.sec_eff[0][1]} ${rune.sec_eff[0][3] ? "+ " + rune.sec_eff[0][3] : ''} ${Stats[rune.sec_eff[0][0]]}` : '',
+        sub2: rune.sec_eff.length > 1 ? `${rune.sec_eff[1][1]} ${rune.sec_eff[1][3] ? "+ " + rune.sec_eff[1][3] : ''} ${Stats[rune.sec_eff[1][0]]}` : '',
+        sub3: rune.sec_eff.length > 2 ? `${rune.sec_eff[2][1]} ${rune.sec_eff[2][3] ? "+ " + rune.sec_eff[2][3] : ''} ${Stats[rune.sec_eff[2][0]]}` : '',
+        sub4: rune.sec_eff.length > 3 ? `${rune.sec_eff[3][1]} ${rune.sec_eff[3][3] ? "+ " + rune.sec_eff[3][3] : ''} ${Stats[rune.sec_eff[3][0]]}` : '',
+        currentEff: upgradeInfo.current,
+        maxEff: upgradeInfo.maxHeroGrinded,
+    }))
 }

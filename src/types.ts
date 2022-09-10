@@ -3,7 +3,8 @@ export type Rune = {
     slot_no: number
     set_id: number
     pri_eff: Array<Number>
-    sec_eff: Array<Array<Number>>
+    sec_eff: Array<Array<any>>
+    prefix_eff: Array<any>
 }
 
 export type Json = {
