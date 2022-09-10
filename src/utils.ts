@@ -98,6 +98,7 @@ export function doesRuneHaveSubstat(rune: Rune, stat: Stats) {
 type RuneRowData = {
     id: number,
     set: string,
+    main: string,
     slot: number,
     innate: String,
     sub1: String,
@@ -114,6 +115,7 @@ export function createTableData(runes: any[]): RuneRowData[] {
     return runes.map(({ rune, upgradeInfo }) => ({
         id: rune.rune_id,
         set: sets[rune.set_id],
+        main: Stats[rune.pri_eff[0]],
         slot: rune.slot_no,
         innate: rune.prefix_eff[1] ? `${rune.prefix_eff[1]} ${Stats[rune.prefix_eff[0]]}` : '',
         sub1: rune.sec_eff.length > 0 ? `${rune.sec_eff[0][1]} ${rune.sec_eff[0][3] ? "+ " + rune.sec_eff[0][3] : ''} ${Stats[rune.sec_eff[0][0]]}` : '',

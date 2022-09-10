@@ -5,6 +5,9 @@ import styled from 'styled-components'
 import initJson from './furyn.json'
 import Toolbar from './Toolbar'
 import { Stats } from './types'
+import CssBaseline from '@mui/material/CssBaseline'
+import Container from '@mui/material/Container'
+import Box from '@mui/material/Box';
 
 const Wrapper = styled.div`
   padding: 48px;
@@ -62,21 +65,26 @@ function App() {
   const stats = getAnalyticsForRunes(runes)
 
   return (
-    <Wrapper>
-      <Toolbar
-        set={set}
-        handleSelectSet={handleSelect}
-        slot={slot}
-        handleSelectSlot={handleSelectSlot}
-        json={json}
-        handleUploadJson={handleUpload}
-        stat={stat}
-        setStat={handleSelectStat}
-      />
-      <p>Average Eff of selection: {stats.avg}</p>
+    <React.Fragment>
+      <CssBaseline />
+      <Container>
+        <Box sx={{ height: '100vh', padding: 4 }}>
+          <Toolbar
+            set={set}
+            handleSelectSet={handleSelect}
+            slot={slot}
+            handleSelectSlot={handleSelectSlot}
+            json={json}
+            handleUploadJson={handleUpload}
+            stat={stat}
+            setStat={handleSelectStat}
+          />
+          <p>Average Eff of selection: {stats.avg}</p>
 
-      <DataTable runes={runes} />
-    </Wrapper>
+          <DataTable runes={runes} />
+        </Box>
+      </Container>
+    </React.Fragment>
   )
 }
 
