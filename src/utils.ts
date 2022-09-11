@@ -131,6 +131,7 @@ type RuneRowData = {
     // effWithGrind: String,
 }
 
+const getSubString = (eff : number[]) => `${eff[2] ? '↻' : ''}${eff[1]} ${eff[3] ? "+ " + eff[3] : ''} ${Stats[eff[0]]}`
 
 export function createTableData(runes: any[], useLegend: boolean): RuneRowData[] {
     return runes.map(({ rune, upgradeInfo }) => ({
@@ -139,10 +140,10 @@ export function createTableData(runes: any[], useLegend: boolean): RuneRowData[]
         main: Stats[rune.pri_eff[0]],
         slot: rune.slot_no,
         innate: rune.prefix_eff[1] ? `${rune.prefix_eff[1]} ${Stats[rune.prefix_eff[0]]}` : '',
-        sub1: rune.sec_eff.length > 0 ? `${rune.sec_eff[0][1]} ${rune.sec_eff[0][3] ? "+ " + rune.sec_eff[0][3] : ''} ${Stats[rune.sec_eff[0][0]]}` : '',
-        sub2: rune.sec_eff.length > 1 ? `${rune.sec_eff[1][1]} ${rune.sec_eff[1][3] ? "+ " + rune.sec_eff[1][3] : ''} ${Stats[rune.sec_eff[1][0]]}` : '',
-        sub3: rune.sec_eff.length > 2 ? `${rune.sec_eff[2][1]} ${rune.sec_eff[2][3] ? "+ " + rune.sec_eff[2][3] : ''} ${Stats[rune.sec_eff[2][0]]}` : '',
-        sub4: rune.sec_eff.length > 3 ? `${rune.sec_eff[3][1]} ${rune.sec_eff[3][3] ? "+ " + rune.sec_eff[3][3] : ''} ${Stats[rune.sec_eff[3][0]]}` : '',
+        sub1: rune.sec_eff.length > 0 ? getSubString(rune.sec_eff[0]) : '',
+        sub2: rune.sec_eff.length > 1 ? getSubString(rune.sec_eff[1]) : '',
+        sub3: rune.sec_eff.length > 2 ? getSubString(rune.sec_eff[2]) : '',
+        sub4: rune.sec_eff.length > 3 ? getSubString(rune.sec_eff[3]) : '',
         currentEff: upgradeInfo.current,
         maxEff: useLegend ? upgradeInfo.maxLegendGrinded : upgradeInfo.maxHeroGrinded,
     }))
