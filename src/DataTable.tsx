@@ -19,8 +19,8 @@ const columns: GridColDef[] = [
 ];
 
 
-export default function DataTable({ runes }: { runes: any }) {
-    const tableData = createTableData(runes)
+export default function DataTable({ runes, useLegend }: { runes: any, useLegend: boolean }) {
+    const tableData = createTableData(runes, useLegend)
   return (
     <Box sx={{ height: '100%' }}>
       <DataGrid

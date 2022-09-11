@@ -85,7 +85,7 @@ function App() {
           />
           <p>Average Eff of selection: {stats.avg}</p>
 
-          <DataTable runes={runes} />
+          <DataTable runes={runes} useLegend={useLegend} />
         </Box>
       </Container>
     </React.Fragment>

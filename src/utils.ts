@@ -132,7 +132,7 @@ type RuneRowData = {
 }
 
 
-export function createTableData(runes: any[]): RuneRowData[] {
+export function createTableData(runes: any[], useLegend: boolean): RuneRowData[] {
     return runes.map(({ rune, upgradeInfo }) => ({
         id: rune.rune_id,
         set: sets[rune.set_id],
@@ -144,6 +144,6 @@ export function createTableData(runes: any[]): RuneRowData[] {
         sub3: rune.sec_eff.length > 2 ? `${rune.sec_eff[2][1]} ${rune.sec_eff[2][3] ? "+ " + rune.sec_eff[2][3] : ''} ${Stats[rune.sec_eff[2][0]]}` : '',
         sub4: rune.sec_eff.length > 3 ? `${rune.sec_eff[3][1]} ${rune.sec_eff[3][3] ? "+ " + rune.sec_eff[3][3] : ''} ${Stats[rune.sec_eff[3][0]]}` : '',
         currentEff: upgradeInfo.current,
-        maxEff: upgradeInfo.maxHeroGrinded,
+        maxEff: useLegend ? upgradeInfo.maxLegendGrinded : upgradeInfo.maxHeroGrinded,
     }))
 }
