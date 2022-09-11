@@ -22,7 +22,9 @@ type ToolbarProps = {
     stat: Stats | null,
     setStat: (event: any) => void,
     showEquippedOnly: boolean,
-    setShowEquipped: (event: any, checked: boolean) => void
+    setShowEquipped: (event: any, checked: boolean) => void,
+    useLegend: boolean,
+    setUseLegend: (event: any, checked: boolean) => void
 }
 
 const Wrapper = styled.div`
@@ -43,6 +45,8 @@ function Toolbar({
     setStat,
     showEquippedOnly,
     setShowEquipped,
+    useLegend,
+    setUseLegend,
 }: ToolbarProps) {
   return (
     <Wrapper>
@@ -94,6 +98,7 @@ function Toolbar({
           </Select>
         </FormControl>
       </Box>
+      <FormControlLabel control={<Checkbox checked={useLegend} onChange={setUseLegend} />} label="Use Legend?" />
       <FormControlLabel control={<Checkbox checked={showEquippedOnly} onChange={setShowEquipped} />} label="Equipped Runes Only?" />
       <Box sx={{ minWidth: 150 }}>
         <input type="file" accept=".json" onChange={handleUploadJson}/>

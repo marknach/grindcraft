@@ -30,6 +30,7 @@ type OptionsType = {
     set_id: number,
     slot_id: number,
     showEquipped: boolean,
+    useLegend: boolean,
     stat: Stats | null,
     limit: number
 }
@@ -41,6 +42,7 @@ export function getRunes(
         slot_id: 0,
         stat: null,
         showEquipped: false,
+        useLegend: false,
         limit: 250
     }
 ) {
@@ -58,7 +60,7 @@ export function getRunes(
     }
 
     if (options.stat) {
-        runes = runes.filter(rune => doesRuneHaveSubstat(rune.rune, options.stat as Stats) && couldUseGrind(rune.rune, options.stat as Stats))
+        runes = runes.filter(rune => doesRuneHaveSubstat(rune.rune, options.stat as Stats) && couldUseGrind(rune.rune, options.stat as Stats, options.useLegend))
     }
 
     if (options.showEquipped) {
