@@ -1,5 +1,6 @@
 import { Rune, Json, Stats } from './types'
 import { GRIND_VALUES, sets } from './constants'
+import mapping from './mapping'
 const eff = require('./rune_eff_plugin.js')
 
 
@@ -128,12 +129,29 @@ type RuneRowData = {
     sub4: String,
     currentEff: String,
     maxEff: String,
+    location: String,
     // effWithGrind: String,
 }
 
-const getSubString = (eff : number[]) => `${eff[2] ? '↻' : ''}${eff[1]} ${eff[3] ? "+ " + eff[3] : ''} ${Stats[eff[0]]}`
+const getSubString = (eff : number[]) => `${eff[2] ? '↻ ' : ''}${eff[1]} ${eff[3] ? "+ " + eff[3] : ''} ${Stats[eff[0]]}`
 
-export function createTableData(runes: any[], useLegend: boolean): RuneRowData[] {
+const getLocationForRune = (rune: Rune, json: Json) => {
+    if (rune.occupied_id === undefined || rune.occupied_type === 2) {
+        return 'Inventory'
+    }
+    return getMonsterNameFromId(rune.occupied_id, json)
+}
+
+const getMonsterNameFromId = (id: number, json: Json) : String  => {
+    const unit = json.unit_list.filter(unit => unit.unit_id === id)
+    if (unit.length === 0) {
+        return 'False'
+    }
+    const masterId = unit[0].unit_master_id
+    return mapping.monster.names[masterId] || 'Inventory'
+}
+
+export function createTableData(runes: any[], json: Json, useLegend: boolean): RuneRowData[] {
     return runes.map(({ rune, upgradeInfo }) => ({
         id: rune.rune_id,
         set: sets[rune.set_id],
@@ -146,5 +164,6 @@ export function createTableData(runes: any[], useLegend: boolean): RuneRowData[]
         sub4: rune.sec_eff.length > 3 ? getSubString(rune.sec_eff[3]) : '',
         currentEff: upgradeInfo.current,
         maxEff: useLegend ? upgradeInfo.maxLegendGrinded : upgradeInfo.maxHeroGrinded,
+        location: getLocationForRune(rune, json)
     }))
 }

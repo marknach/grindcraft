@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { createTableData } from './utils'
+import { Json } from './types'
 
 const columns: GridColDef[] = [
 //   { field: 'id', headerName: 'ID', width: 125 },
@@ -16,11 +17,12 @@ const columns: GridColDef[] = [
   { field: 'sub4', headerName: 'Sub 4', width: 125 },
   { field: 'currentEff', headerName: 'Current Efficiency', width: 80 },
   { field: 'maxEff', headerName: 'Max Efficiency', width: 80 },
+  { field: 'location', headerName: 'Location', width: 80 },
 ];
 
 
-export default function DataTable({ runes, useLegend }: { runes: any, useLegend: boolean }) {
-    const tableData = createTableData(runes, useLegend)
+export default function DataTable({ runes, json, useLegend }: { runes: any, json: Json, useLegend: boolean }) {
+    const tableData = createTableData(runes, json, useLegend)
   return (
     <Box sx={{ height: '100%' }}>
       <DataGrid

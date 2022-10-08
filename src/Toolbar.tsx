@@ -52,10 +52,10 @@ function Toolbar({
     <Wrapper>
       <Box sx={{ minWidth: 150 }}>
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Set</InputLabel>
+          <InputLabel id="set-label">Set</InputLabel>
           <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
+            labelId="set-label"
+            id="set-select"
             value={set}
             label="Set"
             onChange={handleSelectSet}
@@ -68,10 +68,10 @@ function Toolbar({
       </Box>
       <Box sx={{ minWidth: 150 }}>
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Slot</InputLabel>
+          <InputLabel id="slot-label">Slot</InputLabel>
           <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
+            labelId="slot-label"
+            id="slot-select"
             value={slot}
             label="Slot"
             onChange={handleSelectSlot}
@@ -84,10 +84,10 @@ function Toolbar({
       </Box>
       <Box sx={{ minWidth: 150 }}>
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Grind Type</InputLabel>
+          <InputLabel id="type-label">Grind Type</InputLabel>
           <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
+            labelId="type-label"
+            id="type-select"
             value={stat || ''}
             label="Grind Type"
             onChange={setStat}

@@ -6,11 +6,14 @@ export type Rune = {
     sec_eff: Array<Array<any>>
     prefix_eff: Array<any>
     occupied_type?: number
+    occupied_id?: number
     class: number
 }
 
 export type Unit = {
     runes: Rune[]
+    unit_master_id: number
+    unit_id: number
 }
 
 export type Json = {
