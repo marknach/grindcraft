@@ -11,12 +11,15 @@ import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
+import { useTheme } from '@mui/material/styles'
+import { ColorModeContext } from './context'
+import IconButton from '@mui/material/IconButton'
+import Brightness4Icon from '@mui/icons-material/Brightness4'
+import Brightness7Icon from '@mui/icons-material/Brightness7'
 
 type ToolbarProps = {
     set: number,
     handleSelectSet: (event: any) => void,
-    slot: number,
-    handleSelectSlot: (event: any) => void,
     json: object,
     handleUploadJson: (event: any) => void,
     stat: Stats | null,
@@ -37,8 +40,6 @@ const Wrapper = styled.div`
 function Toolbar({
     set,
     handleSelectSet,
-    slot,
-    handleSelectSlot,
     json,
     handleUploadJson,
     stat,
@@ -48,6 +49,9 @@ function Toolbar({
     useLegend,
     setUseLegend,
 }: ToolbarProps) {
+  const theme = useTheme();
+  const colorMode = React.useContext(ColorModeContext);
+
   return (
     <Wrapper>
       <Box sx={{ minWidth: 150 }}>
@@ -61,22 +65,6 @@ function Toolbar({
             onChange={handleSelectSet}
           >
             {Object.entries(sets).map(([key, value]) => (
-              <MenuItem value={key}>{value}</MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Box>
-      <Box sx={{ minWidth: 150 }}>
-        <FormControl fullWidth>
-          <InputLabel id="slot-label">Slot</InputLabel>
-          <Select
-            labelId="slot-label"
-            id="slot-select"
-            value={slot}
-            label="Slot"
-            onChange={handleSelectSlot}
-          >
-            {Object.entries(slots).map(([key, value]) => (
               <MenuItem value={key}>{value}</MenuItem>
             ))}
           </Select>
@@ -103,6 +91,19 @@ function Toolbar({
       <Box sx={{ minWidth: 150 }}>
         <input type="file" accept=".json" onChange={handleUploadJson}/>
       </Box>
+
+    <Box
+      sx={{
+        bgcolor: 'background.default',
+        color: 'text.primary',
+        minWidth: 150
+      }}
+    >
+      {theme.palette.mode} mode
+      <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
+        {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+      </IconButton>
+    </Box>
     </Wrapper>
   );
 }

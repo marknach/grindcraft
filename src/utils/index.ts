@@ -1,7 +1,7 @@
-import { Rune, Json, Stats } from './types'
-import { GRIND_VALUES, sets } from './constants'
-import mapping from './mapping'
-const eff = require('./rune_eff_plugin.js')
+import { Rune, Json, Stats } from '../types'
+import { GRIND_VALUES, sets } from '../constants'
+import mapping from '../mapping'
+const eff = require('../rune_eff_plugin.js')
 
 
 function processRune(rune: Rune) {
@@ -29,6 +29,7 @@ function getRunesFromJson(json: Json) : Rune[] {
 
 type OptionsType = {
     set_id: number,
+    slot_id: number,
     showEquipped: boolean,
     useLegend: boolean,
     stat: Stats | null,
@@ -39,6 +40,7 @@ export function getRunes(
     json: Json,
     options: OptionsType = {
         set_id: 0,
+        slot_id: 0,
         stat: null,
         showEquipped: false,
         useLegend: false,
@@ -52,6 +54,10 @@ export function getRunes(
 
     if (options.set_id) {
         runes = runes.filter(rune => rune.rune.set_id === options.set_id)
+    }
+
+    if (options.slot_id) {
+        runes = runes.filter(rune => rune.rune.slot_no === options.slot_id)
     }
 
     if (options.stat) {
