@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
 
-import { sets, slots } from './constants'
+import { sets } from './constants'
 import { Stats } from './types'
 
 import Box from '@mui/material/Box'
